@@ -24,7 +24,11 @@ const noteSchema = new Schema(
       required: [true, `userId is required!!!`],
     },
   },
-  { timestamps: true },
+  {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  },
 );
 
 const noteModel = mongoose.model("Note", noteSchema);
