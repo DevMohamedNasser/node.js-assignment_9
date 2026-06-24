@@ -5,7 +5,7 @@ export const signupSchema = joi.object({
   email: joi.string().email().required(),
   password: joi.string().min(6),
   phone: joi.string().length(11),
-  age: joi.number().min(0).max(150),
+  age: joi.number().min(18).max(60),
   confirmPassword: joi
     .string()
     .valid(joi.ref("password")),
