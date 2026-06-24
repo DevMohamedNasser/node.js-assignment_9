@@ -1,12 +1,12 @@
 import express from "express";
 import bootstrap from "./src/app.controller.js";
+import { SERVER_PORT, SERVER_URL } from "./src/Config/config.service.js";
 
 const app = express();
-const port = process.env.SERVER_PORT;
-const server_url = process.env.SERVER_URL;
+
 
 await bootstrap(app, express);
 
-app.listen(port, () => {
-    console.log(`Server has been run on ${server_url}:${port}`);
+app.listen(SERVER_PORT, () => {
+    console.log(`Server has been run on ${SERVER_URL}:${SERVER_PORT}`);
 })

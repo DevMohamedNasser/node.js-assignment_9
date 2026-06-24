@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { ProviderEnum, RoleEnum } from "../../Utils/enums/users.enum.js";
 
 const userSchema = new Schema(
   {
@@ -15,18 +16,34 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "password is required"],
+      // required: [true, "password is required"],
+      required: function (values) {
+        return this.provider == ProviderEnum.System;
+      },
     },
     phone: {
       type: String,
-      required: [true, "phone is required"],
+      // required: [true, "phone is required"],
+      required: function (values) {
+        return this.provider == ProviderEnum.System;
+      },
     },
-    phoneIV: String,
     age: {
       type: Number,
       min: [18, "age must be at least 18"],
       max: [60, "age must be at most 60"],
     },
+    role: {
+      type: Number,
+      enum: Object.values(RoleEnum),
+      default: RoleEnum.User,
+    },
+    provider: {
+      type: Number,
+      enum: Object.values(ProviderEnum),
+      default: ProviderEnum.System,
+    },
+    picture: String,
   },
   {
     toJSON: { virtuals: true },
